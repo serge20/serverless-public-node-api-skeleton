@@ -4,8 +4,17 @@ service: serverless-public-node-api-skeleton
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
+  stage: ${opt:stage, 'local'}
   region: us-east-1
+  environment: ${file(env.yml):${self:provider.stage}}
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  serverless-offline:
+    babelOptions:
+      presets: ["env", "stage-3"]
 
 functions:
   app:
@@ -16,3 +25,4 @@ functions:
 
 plugins:
   - serverless-offline
+  - serverless-webpack
