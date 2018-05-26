@@ -2,6 +2,10 @@
 node_modules
 jspm_packages
 
+
 # Serverless directories
 .serverless
 .webpack
+
+#other files
+yarn-error.log
